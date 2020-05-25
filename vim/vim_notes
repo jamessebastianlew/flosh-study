@@ -1,0 +1,34 @@
+:set path+=**
+:set path?
+
+display all matching files with "tab complete"
+:set wildmenu
+
+:find filename
+:find *.cpp
+
+autocomplete open any buffer
+:b previ
+
+will open if previ is a unique substring of files in the ":ls" buffer
+
+
+run terminal command
+$ ctags -R .
+to generate tags for all files inside of the current folder
+
+jump to tag under cursor
+ctrl+]
+find every instance of the tag under cursor
+g+ctrl+]
+go back to previous tag jump
+ctrl+t
+
+autocomplete
+autocompleted
+^x^n for current file
+^x^f for filenames
+^x^] for tags
+^n default autocomplete
+
+^e for exit completion and stay in insertion
