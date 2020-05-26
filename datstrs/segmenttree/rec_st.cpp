@@ -45,7 +45,7 @@ void update(int x, int val, int id=1, int l=0, int r=n) {
     int mid = (l+r)/2;
 
     update(x, val, 2*id, l, mid);
-    update(x, val, 2*id, mid, r);
+    update(x, val, 2*id+1, mid, r);
     st_min[id]=min(st_min[2*id], st_min[2*id+1]);
 }
 
