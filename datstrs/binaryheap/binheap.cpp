@@ -21,6 +21,15 @@ void shiftdown(int u) {
     }
 }
 
+int get_min(int u) {
+    return (u<<1|1)<=len? hp[u<<1]<hp[u<<1|1]?u<<1:u<<1|1 : u<<1;
+}
+
+void shiftdown2(int u) {
+    int x; while((x=get_min(u))<=len && hp[u]>hp[x])
+        swap(hp[u], hp[x]), u=x;
+}
+
 void insert(int x) {
     hp[++len] = x;
     shiftup(len);
@@ -28,7 +37,7 @@ void insert(int x) {
 
 int pop() {
     int x = hp[1];
-    hp[1] = hp[len--], shiftdown(1);
+    hp[1] = hp[len--], shiftdown2(1);
     return x;
 }
 

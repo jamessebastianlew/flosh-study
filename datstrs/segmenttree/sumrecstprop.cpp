@@ -19,22 +19,18 @@ void build(int id=1, int l=0, int r=n) {
 
 void update(int lo, int hi, int val, int id=1, int l=0, int r=n) {
     if (r<=lo || l>=hi) return;
-    if (l>=lo && r<=hi) { dd[id]+=val; return; }
-    st[id]+=(min(r, hi)-max(lo,l))*val;
+    if (l>=lo && r<=hi) { st[id]+=val; dd[id]+=val; return; }
     int mid = (l+r)>>1;
     update(lo,hi,val,id<<1,l,mid); update(lo,hi,val,id<<1|1,mid,r);
+    st[id] = st[id<<1] + st[id<<1|1];
 }
 
 int query(int lo, int hi, int id=1, int l=0, int r=n) {
     if (r<=lo || l>=hi) return 0;
-    if (l>=lo && r<=hi) return st[id] + (r-l)*dd[id];
-    st[id]+=(r-l)*dd[id];
-    dd[id<<1]+=dd[id]; dd[id<<1|1]+=dd[id];
-    dd[id] = 0;
+    if (l>=lo && r<=hi) return st[id];
+    dd[id<<1]+=dd[id]; dd[id<<1|1]+=dd[id]; dd[id] = 0;
     int mid = (l+r)>>1;
-    int left = query(lo,hi,id<<1,l,mid);
-    int right = query(lo,hi,id<<1|1,mid,r);
-    return left+right;
+    return query(lo,hi,id<<1,l,mid)+query(lo,hi,id<<1|1,mid,r);
 }
 
 int main() {
