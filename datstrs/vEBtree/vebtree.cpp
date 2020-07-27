@@ -4,25 +4,36 @@ using namespace std;
 
 const int mxn = 1e5+5;
 
-class veb_tree {
-    int max, num_elems;
-    veb_tree* sched;
-    unordered_map<int, veb_tree> dict_veb;
-} node;
-
-void query(veb_tree* t, int x, int u) {
-    if(u==1) 
-    int key = x>>(u>>1);
-    int temp = 8*sizeof(int) - (u>>1)
-    int val = (x << temp) >> temp;
-
-
-
+int first_half(int val, int u) {
+    return val>>(u>>1);
 }
 
+int second_half(int val, int u) {
+    return val^(val>>(u>>1)<<(u>>1));
+}
+
+typedef struct node {
+    int u, num_elem, max_elem;
+    node* pred_key;
+    unordered_map<int, node*> children;
+    node(int sz) : u(sz) { num_elem = max_elem = 0; }
+} node;
 
 
+void insert(node* root, int val) {
+    if(root->u == 0) root->max_elem = val, root->num_elem = 1;
+    int key = first_half(val, root->u);
+    if(!root->children[key]) root->children[key] = new node(root->u >> 1);
+    insert(root->children[key], second_half(val));
+}
 
+int query(node* root, int val) {
+    int key = first_half(val);
+    if(!root->key
+}
+void insert(node* root, int val) {
+
+}
 int main() {
     return 0;
 }
