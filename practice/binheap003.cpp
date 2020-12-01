@@ -13,10 +13,11 @@ void shiftup(int x) {
 }
 
 int mx_child(int x) {
-    return (x<<1|1)<=len?heap[x<<1] > heap[x<<1|1]?x<<1:x<<1|1: x<<1;
+    return (x<<1|1)<=len?heap[x<<1]>heap[x<<1|1]?x<<1:x<<1|1: x<<1;
 }
 void shiftdown(int x) {
-    for(int u = mx_child(x); (x<<1) <= len && heap[x] < heap[u]; u=mx_child(x))
+    int u = mx_child(x);
+    for(; (x<<1) <= len && heap[x] < heap[u]; u=mx_child(x))
         swap(heap[u], heap[x]), x=u;
 }
 
